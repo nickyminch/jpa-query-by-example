@@ -53,7 +53,10 @@ public class JpaUtil {
     private Map<Class<?>, String> compositePkCache = newHashMap();
     private static JpaUtil instance;
 
-    public static JpaUtil getInstance() {
+    public synchronized static JpaUtil getInstance() {
+    	if(instance==null) {
+    		new JpaUtil();
+    	}
         return instance;
     }
 
